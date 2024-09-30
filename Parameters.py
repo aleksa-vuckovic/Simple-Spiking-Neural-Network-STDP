@@ -4,13 +4,13 @@ import plac
 class Parameters:
     # Script Settings
     mode = "train"
-    weights_path = "Pretrained/weights.csv"
-    labels_path = "Pretrained/labels.csv"
+    weights_path = "Pretrained\\weights.csv"
+    labels_path = "Pretrained\\labels.csv"
     image_inference_path = "image.png"
     debugging_interval = 1
     checkpoint_interval = 1
-    train_dataset_path = "MNIST/training/"
-    test_dataset_path = "MNIST/testing/"
+    train_dataset_path = "MNIST\\training\\"
+    test_dataset_path = "MNIST\\testing\\"
     preprocessing_data = False
     training_images_amount = 800
     test_images_amount = 100

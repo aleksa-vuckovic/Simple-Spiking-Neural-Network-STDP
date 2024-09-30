@@ -4,3 +4,4 @@ pandas
 imageio
 matplotlib
 plac
+tqdm

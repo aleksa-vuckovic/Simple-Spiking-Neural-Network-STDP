@@ -7,6 +7,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 import tensorflow as tf
+from tqdm import tqdm
 
 from Neuron import Neuron
 from Parameters import Parameters
@@ -194,14 +195,13 @@ class SNN:
 
         # Starting training
         for epoch in range(self.parameters.epochs):
-            
             # If data is not preprocessed, the data is going to be converted again for each epoch
             if not self.parameters.use_tf_dataset and not self.parameters.preprocessing_data:
                 X_train, Y_train = X_train_generator(), Y_train_generator()
                 X_test, Y_test = X_test_generator(), Y_test_generator()
 
             # Iterating over each image and coresponding label
-            for image, label in zip(X_train, Y_train):
+            for image, label in tqdm(zip(X_train, Y_train), total = self.parameters.training_images_amount, desc = f"Running epoch {epoch}"):
                 time_start = time.time()
 
                 if self.parameters.preprocessing_data:
@@ -279,9 +279,9 @@ class SNN:
     # Saves the weights and labels in files
     def save_checkpoint(self, epoch, synapses, neuron_labels_lookup):
 
-        weights_path = f"Checkpoints/{self.readable_initial_timestamp}/Epoch_{epoch}/weights.csv"
-        labels_path = f"Checkpoints/{self.readable_initial_timestamp}/Epoch_{epoch}/labels.csv"
-        visualized_weights_path = f"Visualized_Weights/{self.readable_initial_timestamp}/Epoch_{epoch}/"
+        weights_path = f"Checkpoints\\{self.readable_initial_timestamp}\\Epoch_{epoch}\\weights.csv"
+        labels_path = f"Checkpoints\\{self.readable_initial_timestamp}\\Epoch_{epoch}\\labels.csv"
+        visualized_weights_path = f"Visualized_Weights\\{self.readable_initial_timestamp}\\Epoch_{epoch}\\"
 
         pathlib.Path(weights_path[:weights_path.rindex(os.path.sep)]).mkdir(parents=True, exist_ok=True)
         pathlib.Path(labels_path[:labels_path.rindex(os.path.sep)]).mkdir(parents=True, exist_ok=True)
